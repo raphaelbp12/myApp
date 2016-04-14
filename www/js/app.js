@@ -3,9 +3,26 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic', 'ui.router', 'restController', 'menuController', 'addnewController'])
+var app = angular.module('restApp', ['ionic', 'ui.router', 'restController', 'menuController', 'addnewController'])
 
-.run(function($ionicPlatform) {
+app.controller("listRestController",
+
+  function($scope, $http){
+
+    $scope.rests = [];
+
+    $http({
+      method: "GET",
+      url: "https://api.appery.io/rest/1/db/collections/rests",
+      headers: {'Content-Type': 'application/json;',
+                'X-Appery-Database-Id' : '570ff918e4b054aae33016eb'}
+    }).then(function(restsData){
+      $scope.rests = restsData.data;
+      console.log($scope.rests);
+    })
+})
+
+app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -23,13 +40,12 @@ angular.module('starter', ['ionic', 'ui.router', 'restController', 'menuControll
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+app.config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
 
   .state('home', {
     url: "/",
-    templateUrl: 'list.html'
   })
 
   .state('addnew', {

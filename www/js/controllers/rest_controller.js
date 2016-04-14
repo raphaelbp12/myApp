@@ -4,10 +4,15 @@
 
   app.controller('restController',
     function($scope, $http){
-      var url = "http://54.233.126.31/rests";
 
-      $http.get(url)
-        .success(function(rests) {
+      console.log("rest");
+
+      $http.get({
+        method: "GET",
+        url: "https://api.appery.io/rest/1/db/collections/rests",
+        headers: {'Content-Type': 'application/json;',
+                  'X-Appery-Database-Id' : '570ff918e4b054aae33016eb'}
+      }).success(function(rests) {
           $scope.rests = rests;
         })
         .error(function(data) {
