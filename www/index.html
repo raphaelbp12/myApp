@@ -14,6 +14,7 @@
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="js/controllers/rest_controller.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
@@ -25,9 +26,17 @@
 
     <ion-pane>
       <ion-header-bar class="bar-stable">
-        <h1 class="title">Ionic Blank Starter</h1>
+        <h1 class="title">Restaurantes</h1>
       </ion-header-bar>
       <ion-content>
+
+        <ul class="list" ng-controller="restController">
+          <li class="item" ng-repeat="rest in rests">
+            <h3>{{rest.name}}</h3>
+            <p>{{rest.tel}}</p>
+          </li>
+        </ul>
+
       </ion-content>
     </ion-pane>
   </body>
