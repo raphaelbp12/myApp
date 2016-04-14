@@ -1,0 +1,16 @@
+<ion-view view-title="Simple Application Page 1">
+  <ion-content class="padding">
+    <form ng-submit="submit()"  ng-controller="addnewController">
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Name</span>
+        <input type="text" name="restname" placeholder="enter rest name" ng-model="data.restname">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Tel</span>
+        <input type="tel" name="tel" placeholder="enter telefone" ng-model="data.tel">
+      </label>
+
+      <input class="button button-block button-positive" type="submit" name="submit" value="Submit to server">
+    </form>
+  </ion-content>
+</ion-view>
