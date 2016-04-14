@@ -6,21 +6,13 @@
     function($scope, $http, $state){
       $scope.data = {};
 
-      var parameter = JSON.stringify({rest:{name: "teste12321", tel: 1231231}});
-
-      console.log(parameter);
-
       $scope.submit = function(){
           var url = "https://api.appery.io/rest/1/db/collections/rests";
 
 
-          var parameter = JSON.stringify({rest: {name: "teste12321", tel: 1231231}});
-
-          var text = '{"name": "marcia23", "tel": 643525}';
+          var text = '{"name": "'+ $scope.data.restname +'", "tel": "'+ $scope.data.tel +'"}';
           var obj = JSON.parse(text);
-          console.log(obj);
-
-          console.log("submit = " + parameter);
+          //console.log(obj);
 
           $http({
               method: 'POST',
@@ -29,7 +21,8 @@
               headers: {'Content-Type': 'application/json;',
                         'X-Appery-Database-Id' : '570ff918e4b054aae33016eb'}
           }).then(function (res){
-            console.log(res.status);
+            //console.log(res.status);
+            $state.go("home");
           });
       };
     }

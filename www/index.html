@@ -24,22 +24,25 @@
     <!-- your app's js -->
     <script src="js/app.js"></script>
   </head>
-  <body ng-app="restApp" ng-controller="listRestController">
+  <body ng-app="restApp">
 
     <ion-pane>
       <ion-header-bar class="bar-assertive">
-        <button class="button button-assertive" ng-controller="menuController" ng-click="go('home')">List</button>
         <h1 class="title">Restaurantes</h1>
-        <button class="button button-assertive" ng-controller="menuController" ng-click="go('addnew')">+ Rest</button>
       </ion-header-bar>
-      <ion-content>
-        <ul class="list">
-          <li class="item" ng-repeat="rest in rests">
-            <h3>{{rest.name}}</h3>
-            <p>{{rest.tel}}</p>
-          </li>
-        </ul>
-      </ion-content>
+      <ion-nav-view></ion-nav-view>
+      <div class="tabs-striped tabs-color-assertive">
+        <div class="tabs tabs-icon-top">
+          <a class="tab-item" href="#/">
+            <i class="icon ion-navicon-round"></i>
+            Lista
+          </a>
+          <a class="tab-item" href="#/addnew">
+            <i class="icon ion-plus-round"></i>
+            Adicionar
+          </a>
+        </div>
+      </div>
     </ion-pane>
   </body>
 </html>

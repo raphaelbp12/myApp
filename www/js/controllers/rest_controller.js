@@ -5,19 +5,40 @@
   app.controller('restController',
     function($scope, $http){
 
-      console.log("rest");
+      $scope.rests = [];
 
-      $http.get({
-        method: "GET",
-        url: "https://api.appery.io/rest/1/db/collections/rests",
-        headers: {'Content-Type': 'application/json;',
-                  'X-Appery-Database-Id' : '570ff918e4b054aae33016eb'}
-      }).success(function(rests) {
-          $scope.rests = rests;
+      $http({
+       method: "GET",
+       url: "https://api.appery.io/rest/1/db/collections/rests",
+       headers: {'Content-Type': 'application/json;',
+                 'X-Appery-Database-Id' : '570ff918e4b054aae33016eb'}
+      }).then(function(restsData){
+        angular.forEach(restsData.data, function($this) {
+          //console.log($this);
+          $scope.rests.push($this);
         })
-        .error(function(data) {
-          console.log("ocorreu um erro no servidor");
-        })
+      })
+
+      $scope.doRefresh = function() {
+
+        $scope.rests = [];
+
+        //console.log("refreshing");
+        $http({
+         method: "GET",
+         url: "https://api.appery.io/rest/1/db/collections/rests",
+         headers: {'Content-Type': 'application/json;',
+                   'X-Appery-Database-Id' : '570ff918e4b054aae33016eb'}
+        }).success(function(restsData) {
+          angular.forEach(restsData, function($this) {
+            //console.log($this);
+            $scope.rests.push($this);
+          })
+         }).finally(function() {
+           // Stop the ion-refresher from spinning
+           $scope.$broadcast('scroll.refreshComplete');
+         });
+      };
     }
   );
 

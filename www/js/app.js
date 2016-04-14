@@ -5,23 +5,6 @@
 // the 2nd parameter is an array of 'requires'
 var app = angular.module('restApp', ['ionic', 'ui.router', 'restController', 'menuController', 'addnewController'])
 
-app.controller("listRestController",
-
-  function($scope, $http){
-
-    $scope.rests = [];
-
-    $http({
-      method: "GET",
-      url: "https://api.appery.io/rest/1/db/collections/rests",
-      headers: {'Content-Type': 'application/json;',
-                'X-Appery-Database-Id' : '570ff918e4b054aae33016eb'}
-    }).then(function(restsData){
-      $scope.rests = restsData.data;
-      console.log($scope.rests);
-    })
-})
-
 app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -46,6 +29,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
   .state('home', {
     url: "/",
+    templateUrl: 'list.html'
   })
 
   .state('addnew', {

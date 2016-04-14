@@ -1,6 +1,10 @@
-<ion-view view-title="Simple Application Page 2">
-  <ion-content class="padding">
-    <ul class="list" ng-controller="restController">
+<ion-view view-title="Lista de todos os restaurantes">
+  <ion-content  class="tabs-top has-tabs" ng-controller="restController">
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
+    <ul class="list">
       <li class="item" ng-repeat="rest in rests">
         <h3>{{rest.name}}</h3>
         <p>{{rest.tel}}</p>
